@@ -12,7 +12,7 @@ export default function RentPage() {
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: '',
     minPrice: 0,
-    maxPrice: 999999,
+    maxPrice: Infinity,
     bedrooms: 0,
     bathrooms: 0,
   });
@@ -44,7 +44,7 @@ export default function RentPage() {
 
           <div>
             <h2 className="text-2xl font-bold mb-6">
-              {filteredProperties.length > 0 ? `${filteredProperties.length} Properties Found` : 'No properties found'}
+              {filteredProperties.length > 0 ? `${filteredProperties.length} of ${allRentProperties.length} Properties Found` : 'No properties found'}
             </h2>
 
             {filteredProperties.length > 0 ? (

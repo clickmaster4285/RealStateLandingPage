@@ -20,7 +20,7 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: '',
     minPrice: 0,
-    maxPrice: 999999,
+    maxPrice: Infinity,
     bedrooms: 0,
     bathrooms: 0,
   });
@@ -35,7 +35,7 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
     const emptyFilters: FilterState = {
       searchTerm: '',
       minPrice: 0,
-      maxPrice: 999999,
+      maxPrice: Infinity,
       bedrooms: 0,
       bathrooms: 0,
     };
@@ -73,7 +73,7 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
             type="number"
             placeholder="0"
             value={filters.minPrice}
-            onChange={(e) => handleChange({ minPrice: parseInt(e.target.value) || 0 })}
+            onChange={(e) => handleChange({ minPrice: Number(e.target.value) || 0 })}
             className="w-full px-4 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
@@ -83,9 +83,9 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
           <label className="block text-sm font-medium mb-2">Max Price</label>
           <input
             type="number"
-            placeholder="999999"
-            value={filters.maxPrice}
-            onChange={(e) => handleChange({ maxPrice: parseInt(e.target.value) || 999999 })}
+            placeholder="No limit"
+            value={filters.maxPrice === Infinity ? '' : filters.maxPrice}
+            onChange={(e) => handleChange({ maxPrice: Number(e.target.value) || Infinity })}
             className="w-full px-4 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
@@ -95,7 +95,7 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
           <label className="block text-sm font-medium mb-2">Bedrooms</label>
           <select
             value={filters.bedrooms}
-            onChange={(e) => handleChange({ bedrooms: parseInt(e.target.value) })}
+            onChange={(e) => handleChange({ bedrooms: Number(e.target.value) })}
             className="w-full px-4 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value={0}>Any</option>
@@ -112,7 +112,7 @@ export default function PropertyFilter({ onFilterChange, type }: PropertyFilterP
           <label className="block text-sm font-medium mb-2">Bathrooms</label>
           <select
             value={filters.bathrooms}
-            onChange={(e) => handleChange({ bathrooms: parseInt(e.target.value) })}
+            onChange={(e) => handleChange({ bathrooms: Number(e.target.value) })}
             className="w-full px-4 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value={0}>Any</option>

@@ -12,7 +12,7 @@ export default function SellPage() {
   const [filters, setFilters] = useState<FilterState>({
     searchTerm: '',
     minPrice: 0,
-    maxPrice: 999999,
+    maxPrice: Infinity,
     bedrooms: 0,
     bathrooms: 0,
   });
@@ -44,7 +44,7 @@ export default function SellPage() {
 
           <div>
             <h2 className="text-2xl font-bold mb-6">
-              {filteredProperties.length > 0 ? `${filteredProperties.length} Properties For Sale` : 'No properties found'}
+              {filteredProperties.length > 0 ? `${filteredProperties.length} of ${allSellProperties.length} Properties For Sale` : 'No properties found' } (${allSellProperties.length} total)
             </h2>
 
             {filteredProperties.length > 0 ? (
@@ -73,7 +73,7 @@ export default function SellPage() {
                     setFilters({
                       searchTerm: '',
                       minPrice: 0,
-                      maxPrice: 999999,
+                      maxPrice: Infinity,
                       bedrooms: 0,
                       bathrooms: 0,
                     })

@@ -1,29 +1,29 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/hero-section';
-import { Award, Users, Globe, Heart } from 'lucide-react';
+import { Award, Users, Globe, Heart, Code, Shield, Zap, BarChart } from 'lucide-react';
 
 export default function AboutPage() {
   const values = [
     {
-      icon: Award,
-      title: 'Excellence',
-      description: 'We strive for excellence in every transaction and interaction with our clients.',
+      icon: Code,
+      title: 'Technical Excellence',
+      description: 'We write clean, scalable, and maintainable code that powers modern real estate operations.',
     },
     {
-      icon: Users,
-      title: 'Integrity',
-      description: 'Honesty and transparency are the foundation of our business relationships.',
+      icon: Shield,
+      title: 'Security First',
+      description: 'Your clients\' data and transactions are protected with enterprise-grade security standards.',
     },
     {
-      icon: Globe,
-      title: 'Community',
-      description: 'We are committed to serving and strengthening the communities we work in.',
+      icon: Zap,
+      title: 'Innovation',
+      description: 'We continuously evolve our POS solutions to meet the changing demands of real estate businesses.',
     },
     {
       icon: Heart,
-      title: 'Passion',
-      description: 'Our passion for real estate drives us to deliver exceptional results.',
+      title: 'Client Success',
+      description: 'Your growth is our mission. We partner with you to achieve measurable results.',
     },
   ];
 
@@ -32,29 +32,34 @@ export default function AboutPage() {
       <Navbar />
 
       <HeroSection
-        title="About RealEstate"
-        subtitle="Leading the real estate industry with integrity, expertise, and innovation for over 25 years."
-        primaryCtaText="Learn More"
+        title="About Us"
+        subtitle="We build powerful POS software that helps real estate agencies streamline sales, manage properties, and close deals faster."
+        primaryCtaText="View Solutions"
         primaryCtaHref="/services"
+          backgroundImage="/images/hero-about.jpg"
       />
 
+     
       {/* Our Story */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Founded in 1999, RealEstate has grown from a small local agency to one of the region&apos;s most trusted and respected real estate firms. Our journey has been driven by a commitment to helping people find their perfect homes and achieve their real estate goals.
-            </p>
-            <p className="text-lg text-muted-foreground mb-6">
-              What started as a vision to provide honest, transparent real estate services has evolved into a comprehensive platform that serves thousands of clients annually. Over the years, we&apos;ve built a reputation for excellence, innovation, and genuine care for our clients&apos; needs.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              Today, with a team of 500+ dedicated professionals and access to thousands of listings, we continue to set the standard for real estate excellence in our region.
-            </p>
-          </div>
-        </div>
-      </section>
+<section className="py-16 md:py-24 bg-background">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-3xl mx-auto">
+      <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
+      <p className="text-lg text-muted-foreground mb-6">
+        Every great solution begins with a problem—and ours was clear. Real estate agencies were navigating a maze of outdated tools that slowed them down, created friction, and left opportunities on the table. We imagined a smarter, smoother way forward.
+      </p>
+      <p className="text-lg text-muted-foreground mb-6">
+        Starting as a small circle of curious developers and real estate professionals, we were driven by one goal: to build software that works the way people actually do. One that feels intuitive, simplifies complex workflows, and lets teams focus on what really matters—connecting with clients and closing deals.
+      </p>
+      <p className="text-lg text-muted-foreground mb-6">
+        Over the years, that vision grew into a global platform trusted by hundreds of agencies. From capturing leads in real time to tracking commissions effortlessly, every feature is shaped by the challenges our clients face every day.
+      </p>
+      <p className="text-lg text-muted-foreground">
+        Today, we’re proud to be more than just a tool. We’re a partner in growth, helping agencies unlock their potential, streamline operations, and thrive in an ever-evolving market. Innovation is at our core, and our journey is far from over—we continue to evolve alongside those we serve, always pushing forward.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Stats Section */}
       <section className="py-16 md:py-24 bg-card border-t border-border">
@@ -62,20 +67,20 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">By the Numbers</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">25+</div>
-              <p className="text-muted-foreground">Years in Business</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-primary mb-2">12k+</div>
-              <p className="text-muted-foreground">Properties Sold</p>
+              <div className="text-4xl font-bold text-primary mb-2">7+</div>
+              <p className="text-muted-foreground">Years in Development</p>
             </div>
             <div>
               <div className="text-4xl font-bold text-primary mb-2">500+</div>
-              <p className="text-muted-foreground">Agents & Staff</p>
+              <p className="text-muted-foreground">Agencies Using Our POS</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">95%</div>
-              <p className="text-muted-foreground">Client Satisfaction</p>
+              <div className="text-4xl font-bold text-primary mb-2">$2B+</div>
+              <p className="text-muted-foreground">Transactions Processed</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-primary mb-2">99.9%</div>
+              <p className="text-muted-foreground">Uptime SLA</p>
             </div>
           </div>
         </div>
@@ -84,7 +89,7 @@ export default function AboutPage() {
       {/* Our Values */}
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Values</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => {
               const IconComponent = value.icon;
@@ -102,51 +107,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Leadership */}
-      <section className="py-16 md:py-24 bg-card border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Leadership Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Sarah Johnson',
-                title: 'CEO & Founder',
-                bio: 'With over 25 years of real estate experience, Sarah founded RealEstate with a vision of transforming the industry.',
-              },
-              {
-                name: 'Michael Chen',
-                title: 'Chief Operations Officer',
-                bio: 'Michael brings 20 years of operational excellence and is responsible for our day-to-day operations.',
-              },
-              {
-                name: 'Emily Rodriguez',
-                title: 'Chief Technology Officer',
-                bio: 'Emily leads our technology initiatives and ensures we stay at the forefront of innovation.',
-              },
-            ].map((member) => (
-              <div key={member.name} className="bg-background border border-border rounded-xl p-6 text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                <p className="text-primary font-medium text-sm mb-3">{member.title}</p>
-                <p className="text-muted-foreground text-sm">{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    
 
       {/* CTA */}
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Growing Community</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Modernize Your Real Estate POS?</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Whether you&apos;re looking to buy, rent, or sell, our team is ready to help you succeed.
+            Join 500+ agencies that trust our software to manage listings, track commissions, and close deals faster.
           </p>
           <a
             href="/contact"
             className="inline-flex px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium"
           >
-            Get in Touch
+            Request a Demo
           </a>
         </div>
       </section>

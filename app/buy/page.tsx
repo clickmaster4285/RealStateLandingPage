@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/hero-section';
@@ -26,6 +26,8 @@ export default function BuyPage() {
     bathrooms: filters.bathrooms,
   });
 
+
+
   return (
     <main className="min-h-screen flex flex-col">
       <Navbar />
@@ -44,7 +46,7 @@ export default function BuyPage() {
 
           <div>
             <h2 className="text-2xl font-bold mb-6">
-              {filteredProperties.length > 0 ? `${filteredProperties.length} Properties Found` : 'No properties found'}
+              {filteredProperties.length > 0 ? `${filteredProperties.length} of ${allBuyProperties.length} Properties Found` : 'No properties found'}
             </h2>
 
             {filteredProperties.length > 0 ? (
@@ -73,7 +75,7 @@ export default function BuyPage() {
                     setFilters({
                       searchTerm: '',
                       minPrice: 0,
-                      maxPrice: 999999,
+                      maxPrice: Infinity,
                       bedrooms: 0,
                       bathrooms: 0,
                     })
