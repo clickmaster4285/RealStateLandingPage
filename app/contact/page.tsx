@@ -1,10 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import HeroSection from '@/components/hero-section';
-import { Mail, Phone, MapPin, Clock, Send, Building, Navigation } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import HeroSection from "@/components/hero-section";
+import { Mail, Phone, MapPin, Clock, Send, Building, Navigation, CheckCircle2 } from "lucide-react";
 
 const animationStyles = `
   @keyframes slideInUp {
@@ -31,9 +35,37 @@ const animationStyles = `
   .contact-section {
     animation: slideInUp 0.6s ease-out 0.2s both;
   }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .success-screen {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
 `;
 
-// Location configuration
+// Form schema
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters").max(100),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional(),
+  services: z.string(),
+  message: z.string().min(10, "Message must be at least 10 characters").max(2000),
+  company: z.string().optional(),
+  budget: z.string().optional()
+});
+
+// Infer form types
+type ContactFormData = z.infer<typeof contactSchema>;
+
 const LOCATION = {
   name: "ClickMasters - Real Estate POS",
   address: "Paris Shopping Mall, 4th floor, PWD",
@@ -42,65 +74,82 @@ const LOCATION = {
   lng: 73.0479,
 };
 
-// Google Maps Embed URL - Replace with your actual Google Maps API key for production
-const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(LOCATION.fullAddress)}&zoom=16`;
-
-// Fallback static embed URL (works without API key)
 const FALLBACK_MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(LOCATION.fullAddress)}&output=embed`;
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+    reset
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      services: "",
+      message: "",
+      company: "",
+      budget: ""
+    }
   });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    setIsSubmitting(false);
-    
-    setTimeout(() => setSubmitted(false), 5000);
-  };
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+      const result = await response.json();
+
+      if (result.success) {
+        setShowSuccess(true);
+        reset();
+        // Auto hide success screen after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+      } else {
+        toast.error(result.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      toast.error("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Phone',
+      title: "Phone",
       infos: [
-        { value: '+92 333-1116842', action: 'tel:+923331116842' },
-        { value: '+92 332-5394285', action: 'tel:+923325394285' },
+        { value: "+92 333-1116842", action: "tel:+923331116842" },
+        { value: "+92 332-5394285", action: "tel:+923325394285" },
       ],
     },
     {
       icon: Mail,
-      title: 'Email',
+      title: "Email",
       infos: [
-        { value: 'marketing@clickmasters.pk', subtext: 'We respond within 24 hours', action: 'mailto:marketing@clickmasters.pk' },
-        { value: 'info@clickmasters.pk', subtext: 'Support team', action: 'mailto:info@clickmasters.pk' },
+        { value: "marketing@clickmasters.pk", subtext: "We respond within 24 hours", action: "mailto:marketing@clickmasters.pk" },
+        { value: "info@clickmasters.pk", subtext: "Support team", action: "mailto:info@clickmasters.pk" },
       ],
     },
-    { icon: Clock, title: 'Hours', infos: [{ value: 'Monday - Saturday', subtext: '9:00 AM - 6:00 PM' }] },
-    { icon: Building, title: 'Support', infos: [{ value: '24/7 Technical Support' }] },
+    { icon: Clock, title: "Hours", infos: [{ value: "Monday - Saturday", subtext: "9:00 AM - 6:00 PM" }] },
+    { icon: Building, title: "Support", infos: [{ value: "24/7 Technical Support" }] },
   ];
 
-  // Get directions URL
   const getDirectionsUrl = () => {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(LOCATION.fullAddress)}`;
   };
@@ -122,7 +171,7 @@ export default function ContactPage() {
       <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map(item => {
+            {contactInfo.map((item) => {
               const IconComponent = item.icon;
               return (
                 <div key={item.title} className="contact-card bg-card border border-border rounded-xl p-6 text-center hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer">
@@ -150,7 +199,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Form & Location Side by Side */}
+      {/* Form & Location */}
       <section id="contact-form" className="py-16 md:py-24 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="contact-section grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -159,130 +208,152 @@ export default function ContactPage() {
               <div className="mb-6">
                 <h2 className="text-2xl md:text-3xl font-bold mb-2">Send Us a Message</h2>
                 <p className="text-muted-foreground">
-                  Fill out the form and we'll get back to you within 24 hours.
+                  Fill out the form and we&apos;ll get back to you within 24 hours.
                 </p>
               </div>
 
-              {submitted && (
-                <div className="mb-6 p-4 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl">
-                  <p className="text-green-800 dark:text-green-300">
-                    ✓ Thank you for your message! We'll be in touch shortly.
+              {showSuccess ? (
+                // Success Screen
+                <div className="success-screen flex flex-col items-center justify-center text-center py-8 md:py-12">
+                  <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle2 className="w-10 h-10 text-green-600 dark:text-green-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Message Sent Successfully!</h3>
+                  <p className="text-muted-foreground mb-4 max-w-sm">
+                    Thank you for contacting us. We&apos;ve received your message and will get back to you within 24 hours.
                   </p>
+                  <div className="bg-primary/10 rounded-lg p-3 mb-6">
+                    <p className="text-sm text-primary">
+                      A confirmation email has been sent to your inbox.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShowSuccess(false)}
+                    className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                        Full Name *
+                      </label>
+                      <input
+                        {...register("name")}
+                        id="name"
+                        type="text"
+                        className={`w-full px-4 py-2.5 border rounded-xl bg-card focus:outline-none focus:ring-2 transition ${
+                          errors.name
+                            ? "border-destructive focus:ring-destructive focus:border-destructive"
+                            : "border-border focus:ring-primary focus:border-primary"
+                        }`}
+                        placeholder="John Doe"
+                      />
+                      {errors.name && (
+                        <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                        Email *
+                      </label>
+                      <input
+                        {...register("email")}
+                        id="email"
+                        type="email"
+                        className={`w-full px-4 py-2.5 border rounded-xl bg-card focus:outline-none focus:ring-2 transition ${
+                          errors.email
+                            ? "border-destructive focus:ring-destructive focus:border-destructive"
+                            : "border-border focus:ring-primary focus:border-primary"
+                        }`}
+                        placeholder="john@example.com"
+                      />
+                      {errors.email && (
+                        <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        {...register("phone")}
+                        id="phone"
+                        type="tel"
+                        className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+                        placeholder="+92 333-1116842"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="services" className="block text-sm font-medium mb-2">
+                        Interested In
+                      </label>
+                      <select
+                        {...register("services")}
+                        id="services"
+                        className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition"
+                      >
+                        <option value="">Select an option...</option>
+                        <option value="demo">Request a demo</option>
+                        <option value="pricing">Pricing inquiry</option>
+                        <option value="support">Technical support</option>
+                        <option value="partnership">Partnership opportunity</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      {...register("message")}
+                      id="message"
+                      rows={5}
+                      className={`w-full px-4 py-2.5 border rounded-xl bg-card focus:outline-none focus:ring-2 transition resize-none ${
+                        errors.message
+                          ? "border-destructive focus:ring-destructive focus:border-destructive"
+                          : "border-border focus:ring-primary focus:border-primary"
+                      }`}
+                      placeholder="Tell us about your real estate agency and what you're looking for..."
+                    />
+                    {errors.message && (
+                      <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={!isValid || !isDirty || isSubmitting}
+                    className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition font-medium flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
               )}
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                      placeholder="John Doe"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                      placeholder="+92 333-1116842"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="demo">Request a demo</option>
-                      <option value="pricing">Pricing inquiry</option>
-                      <option value="support">Technical support</option>
-                      <option value="partnership">Partnership opportunity</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition resize-none"
-                    placeholder="Tell us about your real estate agency and what you're looking for..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition font-medium flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
             </div>
 
             {/* Location & Map */}
             <div className="space-y-6">
-              {/* Map Card */}
               <div className="bg-background border border-border rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="p-4 border-b border-border bg-card/50">
                   <h3 className="font-semibold text-foreground flex items-center gap-2">
@@ -319,7 +390,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Quick Support Note */}
               <div className="bg-primary/5 border border-primary/20 rounded-2xl p-5 text-center">
                 <p className="text-sm text-muted-foreground">
                   🚀 <span className="font-medium text-primary">Need urgent help?</span> Our support team is available 24/7 for POS technical issues.
@@ -329,8 +399,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-    
 
       <Footer />
     </main>
