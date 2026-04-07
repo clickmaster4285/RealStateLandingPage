@@ -10,8 +10,8 @@
   --card-foreground: oklch(0.2 0.01 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.01 0);
-  --primary: oklch(0.56 0.135 31.5);
-  --primary-foreground: oklch(1 0 0);
+  --primary: oklch(0.85 0.18 90);
+  --primary-foreground: oklch(0.20 0.12 260);
   --secondary: oklch(0.88 0.04 160);
   --secondary-foreground: oklch(0.2 0.01 0);
   --muted: oklch(0.92 0.01 0);
@@ -167,6 +167,13 @@
 }
 
 @layer utilities {
+  .property-card {
+    pointer-events: auto !important;
+  }
+  .property-card * {
+    pointer-events: auto !important;
+  }
+
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out;
   }

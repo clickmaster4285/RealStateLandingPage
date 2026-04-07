@@ -14,9 +14,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">RE</span>
+              <span className="text-primary-foreground font-bold">PR</span>
             </div>
-            <span className="font-bold text-xl hidden sm:inline">RealEstate</span>
+            <span className="font-bold text-xl hidden sm:inline">PropertyPro</span>
           </Link>
 
           {/* Desktop Navigation */}

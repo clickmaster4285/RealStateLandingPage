@@ -113,61 +113,60 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us - FIXED LEFT ALIGNMENT */}
       <section className="py-16 md:py-24 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Why Choose Us?</h2>
+          {/* Removed mx-auto and max-w-3xl to allow full left alignment */}
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Why Choose Us?</h2>
 
-            <div className="space-y-6">
-              <div className="why-choose-item flex gap-4">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Expertise & Experience</h3>
-                  <p className="text-muted-foreground">
-                    With 25 years in the real estate industry, our team brings unmatched expertise and proven track record of successful transactions across diverse markets.
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="why-choose-item flex gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Expertise & Experience</h3>
+                <p className="text-muted-foreground">
+                  With 25 years in the real estate industry, our team brings unmatched expertise and proven track record of successful transactions across diverse markets.
+                </p>
               </div>
+            </div>
 
-              <div className="why-choose-item flex gap-4">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Personalized Service</h3>
-                  <p className="text-muted-foreground">
-                    Every client is unique. We tailor our services to meet your specific goals and timeline, providing custom solutions for your real estate needs.
-                  </p>
-                </div>
+            <div className="why-choose-item flex gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Personalized Service</h3>
+                <p className="text-muted-foreground">
+                  Every client is unique. We tailor our services to meet your specific goals and timeline, providing custom solutions for your real estate needs.
+                </p>
               </div>
+            </div>
 
-              <div className="why-choose-item flex gap-4">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Market Knowledge</h3>
-                  <p className="text-muted-foreground">
-                    Our agents stay updated on market trends, prices, and opportunities to serve you better. We provide competitive analysis and investment insights.
-                  </p>
-                </div>
+            <div className="why-choose-item flex gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Market Knowledge</h3>
+                <p className="text-muted-foreground">
+                  Our agents stay updated on market trends, prices, and opportunities to serve you better. We provide competitive analysis and investment insights.
+                </p>
               </div>
+            </div>
 
-              <div className="why-choose-item flex gap-4">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Technology Driven</h3>
-                  <p className="text-muted-foreground">
-                    We leverage cutting-edge technology to provide you with the best tools, virtual tours, and real-time property information.
-                  </p>
-                </div>
+            <div className="why-choose-item flex gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Technology Driven</h3>
+                <p className="text-muted-foreground">
+                  We leverage cutting-edge technology to provide you with the best tools, virtual tours, and real-time property information.
+                </p>
               </div>
+            </div>
 
-              <div className="why-choose-item flex gap-4">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2">Dedicated Support</h3>
-                  <p className="text-muted-foreground">
-                    Our support team is available to answer your questions and provide guidance every step of the way. We&apos;re committed to your success.
-                  </p>
-                </div>
+            <div className="why-choose-item flex gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Dedicated Support</h3>
+                <p className="text-muted-foreground">
+                  Our support team is available to answer your questions and provide guidance every step of the way. We&apos;re committed to your success.
+                </p>
               </div>
             </div>
           </div>

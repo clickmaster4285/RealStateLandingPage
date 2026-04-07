@@ -33,6 +33,21 @@ const animationStyles = `
   }
 `;
 
+// Location configuration
+const LOCATION = {
+  name: "ClickMasters - Real Estate POS",
+  address: "Paris Shopping Mall, 4th floor, PWD",
+  fullAddress: "Paris Shopping Mall, 4th floor, Main PWD Rd, PWD Housing Society Sector A, Islamabad, Punjab 45700, Pakistan",
+  lat: 33.6844,
+  lng: 73.0479,
+};
+
+// Google Maps Embed URL - Replace with your actual Google Maps API key for production
+const GOOGLE_MAPS_EMBED_URL = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(LOCATION.fullAddress)}&zoom=16`;
+
+// Fallback static embed URL (works without API key)
+const FALLBACK_MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(LOCATION.fullAddress)}&output=embed`;
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -68,30 +83,27 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: 'Phone',
-      info: '+1 (555) 123-4567',
-      subtext: 'Available Mon-Fri, 9AM-6PM',
-      action: 'tel:+15551234567',
+      infos: [
+        { value: '+92 333-1116842', action: 'tel:+923331116842' },
+        { value: '+92 332-5394285', action: 'tel:+923325394285' },
+      ],
     },
     {
       icon: Mail,
       title: 'Email',
-      info: 'info@coderealty.com',
-      subtext: 'We respond within 24 hours',
-      action: 'mailto:info@coderealty.com',
+      infos: [
+        { value: 'marketing@clickmasters.pk', subtext: 'We respond within 24 hours', action: 'mailto:marketing@clickmasters.pk' },
+        { value: 'info@clickmasters.pk', subtext: 'Support team', action: 'mailto:info@clickmasters.pk' },
+      ],
     },
-    {
-      icon: Clock,
-      title: 'Hours',
-      info: 'Monday - Friday',
-      subtext: '9:00 AM - 6:00 PM EST',
-    },
-    {
-      icon: Building,
-      title: 'Support',
-      info: '24/7 Technical Support',
-      subtext: 'For urgent POS issues',
-    },
+    { icon: Clock, title: 'Hours', infos: [{ value: 'Monday - Saturday', subtext: '9:00 AM - 6:00 PM' }] },
+    { icon: Building, title: 'Support', infos: [{ value: '24/7 Technical Support' }] },
   ];
+
+  // Get directions URL
+  const getDirectionsUrl = () => {
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(LOCATION.fullAddress)}`;
+  };
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -103,29 +115,35 @@ export default function ContactPage() {
         subtitle="Have questions about our real estate POS software? We're here to help."
         primaryCtaText="Get a Demo"
         primaryCtaHref="#contact-form"
-          backgroundImage="/images/hero-contact.jpg"
+        backgroundImage="/images/hero-contact.jpg"
       />
 
       {/* Contact Info Cards */}
       <section className="py-16 md:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((item) => {
+            {contactInfo.map(item => {
               const IconComponent = item.icon;
-              const Wrapper = item.action ? 'a' : 'div';
               return (
-                <Wrapper
-                  key={item.title}
-                  href={item.action}
-                  className="contact-card group bg-card border border-border rounded-xl p-6 text-center hover:shadow-lg hover:border-primary/50 transition-all hover:-translate-y-1 cursor-pointer"
-                >
+                <div key={item.title} className="contact-card bg-card border border-border rounded-xl p-6 text-center hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer">
                   <div className="flex justify-center mb-4">
-                    <IconComponent className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                    <IconComponent className="w-10 h-10 text-primary" />
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                  <p className="text-primary font-medium mb-1">{item.info}</p>
-                  <p className="text-sm text-muted-foreground">{item.subtext}</p>
-                </Wrapper>
+                  {item.infos.map((info, idx) => (
+                    info.action ? (
+                      <a key={idx} href={info.action} className="block text-primary font-medium mb-1">
+                        {info.value}
+                        <p className="text-sm text-muted-foreground">{info.subtext}</p>
+                      </a>
+                    ) : (
+                      <div key={idx} className="mb-1">
+                        <p className="text-primary font-medium">{info.value}</p>
+                        <p className="text-sm text-muted-foreground">{info.subtext}</p>
+                      </div>
+                    )
+                  ))}
+                </div>
               );
             })}
           </div>
@@ -200,7 +218,7 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-2.5 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+92 333-1116842"
                     />
                   </div>
 
@@ -264,90 +282,40 @@ export default function ContactPage() {
 
             {/* Location & Map */}
             <div className="space-y-6">
-              {/* Office Location Card */}
-              <div className="bg-background border border-border rounded-2xl p-6 md:p-8 shadow-lg">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="p-3 bg-primary/10 rounded-xl">
-                    <MapPin className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">Our Headquarters</h3>
-                    <p className="text-muted-foreground">
-                      123 Software Drive, Suite 400<br />
-                      San Francisco, CA 94107<br />
-                      United States
-                    </p>
-                  </div>
+              {/* Map Card */}
+              <div className="bg-background border border-border rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+                <div className="p-4 border-b border-border bg-card/50">
+                  <h3 className="font-semibold text-foreground flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    Find Us Here
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {LOCATION.address}
+                  </p>
                 </div>
-
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="p-3 bg-primary/10 rounded-xl">
-                    <Navigation className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">Regional Office</h3>
-                    <p className="text-muted-foreground">
-                      456 Innovation Hub<br />
-                      Austin, TX 73301<br />
-                      United States
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-border">
-                  <div className="flex items-center justify-between flex-wrap gap-3">
-                    <a
-                      href="https://maps.google.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary hover:underline text-sm"
-                    >
-                      <MapPin className="w-4 h-4" />
-                      Get Directions
-                    </a>
-                    <a
-                      href="tel:+15551234567"
-                      className="inline-flex items-center gap-2 text-primary hover:underline text-sm"
-                    >
-                      <Phone className="w-4 h-4" />
-                      +1 (555) 123-4567
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Interactive Map */}
-              <div className="bg-background border border-border rounded-2xl overflow-hidden shadow-lg h-80 lg:h-[320px]">
-                <div className="w-full h-full bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center relative">
-                  {/* Static map placeholder - replace with actual map embed */}
-                  <div className="text-center p-6">
-                    <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <p className="text-muted-foreground mb-2">
-                      📍 123 Software Drive, San Francisco, CA
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      View on Google Maps for directions
-                    </p>
-                    <a
-                      href="https://maps.google.com/?q=123+Software+Drive+San+Francisco+CA"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:bg-primary/90 transition"
-                    >
-                      Open in Google Maps
-                    </a>
-                  </div>
-                  
-                  {/* Uncomment to use actual Google Maps embed */}
-                  {/* <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019174329449!2d-122.419415484681!3d37.774929279759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c7b3d8b8d%3A0x4b7b2b8b8b8b8b8!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                <div className="h-[320px] w-full">
+                  <iframe
+                    title="ClickMasters Office Location"
+                    src={FALLBACK_MAP_URL}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                  /> */}
+                    className="transition-transform duration-500 hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="p-4 border-t border-border bg-card/30">
+                  <a
+                    href={getDirectionsUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <Navigation className="h-4 w-4" />
+                    Get Directions
+                  </a>
                 </div>
               </div>
 
@@ -362,29 +330,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ CTA */}
-      <section className="py-16 md:py-20 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground mb-8">
-            Quick answers to common questions about our real estate POS software.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/faq"
-              className="px-6 py-3 border border-border rounded-xl hover:bg-card transition font-medium"
-            >
-              View All FAQs
-            </a>
-            <a
-              href="/demo"
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition font-medium"
-            >
-              Schedule a Demo
-            </a>
-          </div>
-        </div>
-      </section>
+    
 
       <Footer />
     </main>

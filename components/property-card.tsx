@@ -57,7 +57,7 @@ export default function PropertyCard({
   return (
     <>
       <style>{cardAnimationStyles}</style>
-      <Link href={`/property/${id}`}>
+     
         <div className="property-card bg-card rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 cursor-pointer group hover:border-primary/50 hover:scale-105">
         {/* Image Container */}
         <div className="relative w-full h-48 overflow-hidden bg-muted">
@@ -103,7 +103,7 @@ export default function PropertyCard({
           </div>
         </div>
       </div>
-      </Link>
+    
     </>
   );
 }
