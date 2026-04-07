@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">RE</span>
               </div>
-              <span className="font-bold text-lg">RealEstate</span>
+              <span className="font-bold text-lg">PropertyPro</span>
             </div>
             <p className="text-muted-foreground text-sm">Your trusted partner in finding the perfect property.</p>
           </div>
@@ -47,15 +47,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="w-4 h-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+92 333-1116842</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="w-4 h-4" />
-                <span>info@realestate.com</span>
+                <span>marketing@clickmasters.pk</span>
               </li>
               <li className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="w-4 h-4 mt-0.5" />
-                <span>123 Property St<br />Real City, RC 12345</span>
+                <span>Main PWD Rd, Islamabad, Punjab, Pakistan</span>
               </li>
             </ul>
           </div>
@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>&copy; 2024 RealEstate. All rights reserved.</p>
+            <p>&copy; 2026 PropertyPro. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="/" className="hover:text-primary transition">Terms</Link>
               <Link href="/" className="hover:text-primary transition">Privacy</Link>

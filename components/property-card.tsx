@@ -85,7 +85,7 @@ export default function PropertyCard({
           <div className="flex items-center gap-1 mb-4">
             <DollarSign className="w-5 h-5 text-primary" />
             <span className="text-2xl font-bold text-primary">
-              {(price / 1000).toFixed(0)}K
+              {price.toLocaleString()}
             </span>
             {type === 'rent' && <span className="text-muted-foreground text-sm">/mo</span>}
           </div>

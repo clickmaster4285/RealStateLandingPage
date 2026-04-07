@@ -2,10 +2,25 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About Us' },
+    { href: '/buy', label: 'Buy' },
+    { href: '/rent', label: 'Rent' },
+    { href: '/sell', label: 'Sell' },
+    { href: '/services', label: 'Services' },
+    
+  ];
+
+  const activeStyle = "text-primary underline decoration-primary underline-offset-4 font-semibold transition";
+  const inactiveStyle = "text-foreground hover:text-primary transition";
 
   return (
     <nav className="sticky top-0 z-50 bg-background border-b border-border">
@@ -21,13 +36,15 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-8">
-            <Link href="/" className="text-foreground hover:text-primary transition">Home</Link>
-            <Link href="/about" className="text-foreground hover:text-primary transition">About Us</Link>
-            <Link href="/buy" className="text-foreground hover:text-primary transition">Buy</Link>
-            <Link href="/rent" className="text-foreground hover:text-primary transition">Rent</Link>
-            <Link href="/sell" className="text-foreground hover:text-primary transition">Sell</Link>
-            <Link href="/services" className="text-foreground hover:text-primary transition">Services</Link>
-             <Link href="/contact" className="text-foreground hover:text-primary transition">Contact Us</Link>
+            {navItems.map((item) => (
+              <Link 
+                key={item.href}
+                href={item.href}
+                className={pathname === item.href ? activeStyle : inactiveStyle}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
           {/* CTA Button */}
@@ -35,7 +52,7 @@ export default function Navbar() {
             href="/contact"
             className="hidden sm:inline px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition"
           >
-            Log In
+            Contact Us
           </Link>
 
           {/* Mobile Menu Button */}
@@ -55,15 +72,18 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden pb-4 border-t border-border">
-            <Link href="/" className="block py-2 text-foreground hover:text-primary">Home</Link>
-             <Link href="/about" className="block py-2 text-foreground hover:text-primary">About Us</Link>
-            <Link href="/buy" className="block py-2 text-foreground hover:text-primary">Buy</Link>
-            <Link href="/rent" className="block py-2 text-foreground hover:text-primary">Rent</Link>
-            <Link href="/sell" className="block py-2 text-foreground hover:text-primary">Sell</Link>
-            <Link href="/services" className="block py-2 text-foreground hover:text-primary">Services</Link>
-            <Link href="/contact" className="block py-2 text-foreground hover:text-primary">Contact Us</Link>
+            {navItems.map((item) => (
+              <Link 
+                key={item.href}
+                href={item.href}
+                className={`block py-2 ${pathname === item.href ? activeStyle : inactiveStyle}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
 
-            <Link href="/contact" className="block py-3 mt-2 px-0 bg-primary text-primary-foreground rounded-lg text-center">Log In</Link>
+            <Link href="/contact" className="block py-3 mt-2 px-0 bg-primary text-primary-foreground rounded-lg text-center">Contact Us</Link>
           </div>
         )}
       </div>

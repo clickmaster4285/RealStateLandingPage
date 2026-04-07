@@ -184,8 +184,8 @@ export default function PropertyDetailsPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="w-4 h-4 text-primary" />
-                        <a href="mailto:john@realestate.com" className="text-primary hover:underline text-sm">
-                          john@realestate.com
+                        <a href="mailto:john@PropertyPro.com" className="text-primary hover:underline text-sm">
+                          john@PropertyPro.com
                         </a>
                       </div>
                     </div>
