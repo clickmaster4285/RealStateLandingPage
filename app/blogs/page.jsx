@@ -58,7 +58,7 @@ export default function BlogPage() {
                 primaryCtaHref="/buy"
                 secondaryCtaText="Contact Us"
                 secondaryCtaHref="/contact"
-                backgroundImage="/images/blog-hero1.jpg"
+                backgroundImage="/images/blog-hero1.webp"
                 showSearchBar={false}
             />
 

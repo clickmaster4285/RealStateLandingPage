@@ -33,7 +33,7 @@ export default function SellPage() {
       <HeroSection
         title="Sell Your Property"
         subtitle="List your home and connect with qualified buyers. Get the best value for your property."
-        backgroundImage="/images/hero-sell.jpg"
+        backgroundImage="/images/hero-sell.webp"
         primaryCtaText="Explore More"
         primaryCtaHref="/sell"
       />

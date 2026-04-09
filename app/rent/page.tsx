@@ -33,7 +33,7 @@ export default function RentPage() {
       <HeroSection
         title="Find Your Perfect Rental"
         subtitle="Discover comfortable apartments and homes available for rent. Browse our listings today."
-        backgroundImage="/images/hero-rent.jpg"
+        backgroundImage="/images/hero-rent.webp"
         primaryCtaText="Explore More"
         primaryCtaHref="/rent"
       />

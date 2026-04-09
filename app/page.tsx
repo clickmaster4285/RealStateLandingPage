@@ -42,10 +42,10 @@ export default function Home() {
         }
   subtitle="Built for Agencies, Developers & Property Managers – Launch, Scale & Automate Your Real Estate Operations"
   backgroundImages={[
-    '/images/hero-home.jpg',
-    '/images/hero-slide-2.jpg',
-    '/images/hero-slide-3.jpg',
-    '/images/hero-slide-4.jpg'
+    '/images/hero-home.webp',
+    '/images/hero-slide-2.webp',
+    '/images/hero-slide-3.webp',
+    '/images/hero-slide-4.webp'
   ]}
   showSearchBar={false}
   primaryCtaText="Browse Properties"
@@ -107,7 +107,7 @@ export default function Home() {
             <div className="help-card group cursor-pointer">
               <div className="relative overflow-hidden rounded-xl mb-4 h-64">
                 <img
-                  src="/images/service-buying.jpg"
+                  src="/images/service-buying.webp"
                   alt="Buying a home"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -125,7 +125,7 @@ export default function Home() {
             <div className="help-card group cursor-pointer" style={{ animationDelay: '0.4s' }}>
               <div className="relative overflow-hidden rounded-xl mb-4 h-64">
                 <img
-                  src="/images/service-rental.jpg"
+                  src="/images/service-rental.webp"
                   alt="Rental properties"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -143,7 +143,7 @@ export default function Home() {
             <div className="help-card group cursor-pointer" style={{ animationDelay: '0.6s' }}>
               <div className="relative overflow-hidden rounded-xl mb-4 h-64">
                 <img
-                  src="/images/service-selling.jpg"
+                  src="/images/service-selling.webp"
                   alt="Selling a home"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />

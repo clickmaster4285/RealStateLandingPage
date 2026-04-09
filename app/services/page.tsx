@@ -123,7 +123,7 @@ export default function ServicesPage() {
       <HeroSection
         title="Our Services"
         subtitle="Comprehensive real estate solutions tailored to your needs. From buying to selling, we&apos;ve got you covered."
-        backgroundImage="/images/hero-services.jpg"
+        backgroundImage="/images/hero-services.webp"
         primaryCtaText="Get Started"
         primaryCtaHref="/contact"
       />

@@ -35,7 +35,7 @@ export default function BuyPage() {
       <HeroSection
         title="Find Your Dream Home"
         subtitle="Browse our extensive collection of homes for sale. Perfect properties await you."
-        backgroundImage="/images/hero-buy.jpg"
+        backgroundImage="/images/hero-buy.webp"
         primaryCtaText="Explore More"
         primaryCtaHref="/buy"
       />

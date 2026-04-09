@@ -19,7 +19,7 @@ interface HeroSectionProps {
 export default function HeroSection({
   title,
   subtitle,
-  backgroundImage = '/images/hero-home.jpg',
+  backgroundImage = '/images/hero-home.webp',
   backgroundImages,
   showSearchBar = false,
   primaryCtaText = 'Explore',
@@ -30,7 +30,7 @@ export default function HeroSection({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.jpg']);
+    let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.webp']);
     // Only auto-slide if there are multiple images
     if (images.length <= 1) return;
 
@@ -180,7 +180,7 @@ export default function HeroSection({
         {/* Background Slider */}
         <div className="absolute inset-0">
           {(() => {
-            let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.jpg']);
+            let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.webp']);
             return images.map((image, index) => (
               <img
                 key={index}
@@ -197,7 +197,7 @@ export default function HeroSection({
 
         {/* Slider Dots (only show if multiple images) */}
 {(() => {
-            let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.jpg']);
+            let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.webp']);
             return images.length > 1 && (
               <div className="slider-dots">
                 {images.map((_, index) => (

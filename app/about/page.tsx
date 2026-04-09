@@ -36,7 +36,7 @@ export default function AboutPage() {
         subtitle="We build powerful POS software that helps real estate agencies streamline sales, manage properties, and close deals faster."
         primaryCtaText="View Solutions"
         primaryCtaHref="/services"
-          backgroundImage="/images/hero-about.jpg"
+          backgroundImage="/images/hero-about.webp"
       />
 
      

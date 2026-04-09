@@ -231,7 +231,7 @@ SaaS-ready system."
         primaryCtaHref="#contact-form"
         secondaryCtaText="Get This System"
         secondaryCtaHref="#contact-form"
-        backgroundImage="/images/hero-contact.jpg"
+        backgroundImage="/images/hero-contact.webp"
       />
 
       {/* Contact Info Cards */}
