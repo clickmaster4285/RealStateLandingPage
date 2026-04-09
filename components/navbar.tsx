@@ -16,7 +16,7 @@ export default function Navbar() {
     { href: '/rent', label: 'Rent' },
     { href: '/sell', label: 'Sell' },
     { href: '/services', label: 'Services' },
-    { href: '/#pricings', label: 'Pricing' },
+    // { href: '/#pricings', label: 'Pricing' },
     
   ];
 

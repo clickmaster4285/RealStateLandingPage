@@ -348,13 +348,11 @@ export default function Home() {
       
 
             {/* Pricing Section */}
-      <section id="pricings" className="py-16 md:py-24 bg-white">
+      {/* <section id="pricings" className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
+          
           <div className="text-center mb-12">
-            {/* <span className="text-sm font-semibold text-primary/80 uppercase tracking-wider">
-              Pricing Plans
-            </span> */}
+           
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Simple, Transparent{' '}
               <span className="text-primary">
@@ -366,9 +364,9 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Pricing Cards Grid */}
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Basic Plan */}
+            
             <PricingCard
               name="Basic"
               price="$49"
@@ -386,7 +384,7 @@ export default function Home() {
               buttonLink="/contact"
             />
 
-            {/* Professional Plan - Popular */}
+            
             <PricingCard
               name="Professional"
               price="$99"
@@ -407,7 +405,7 @@ export default function Home() {
               buttonLink="/contact"
             />
 
-            {/* Enterprise Plan */}
+           
             <PricingCard
               name="Enterprise"
               price="Custom"
@@ -429,14 +427,14 @@ export default function Home() {
             />
           </div>
 
-          {/* Additional Info */}
+         
           <div className="text-center mt-12">
             <p className="text-sm text-muted-foreground">
               All plans include a 14-day free trial. No credit card required.
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
 
 
