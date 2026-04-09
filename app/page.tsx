@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/hero-section';
@@ -7,6 +11,13 @@ import SolutionCard from '@/components/solution-card';
 import ProblemCard from '@/components/problem-card';
 import PricingCard from '@/components/pricingCard';
 import { properties } from '@/lib/property-data';
+import BlogSection from '@/components/blog-section';
+import TestimonialsSection from '@/components/testimonials-section';
+import { blogPosts, testimonials } from '@/lib/content-data';
+import CaseStudiesSection from '@/components/case-studies-section';
+import { caseStudies } from '@/lib/case-studies-data';
+
+
 import { ArrowRight, FileQuestion, Search, Users } from 'lucide-react';
 
 export default function Home() {
@@ -14,122 +25,32 @@ export default function Home() {
   const buyProperties = properties.filter((p) => p.type === 'buy').slice(0, 3);
   const rentProperties = properties.filter((p) => p.type === 'rent').slice(0, 3);
 
+  const [showAllBlogs, setShowAllBlogs] = useState(false);
+
   return (
     <main className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero Section */}
-      <HeroSection
-        title="All-in-One Real Estate Management System to Manage Properties, Leads & Bookings"
-        subtitle="Built for Agencies, Developers & Property Managers – Launch, Scale & Automate Your Real Estate Operations"
-        backgroundImage="/images/hero-home.jpg"
-        showSearchBar={false}
-        primaryCtaText="Browse Properties"
-        primaryCtaHref="/buy"
-        secondaryCtaText="Get Started"
-        secondaryCtaHref="/services"
-      />
+     {/* Hero Section with Slider */}
+<HeroSection
+  title="All-in-One Real Estate Management System to Manage Properties, Leads & Bookings"
+  subtitle="Built for Agencies, Developers & Property Managers – Launch, Scale & Automate Your Real Estate Operations"
+  backgroundImages={[
+    '/images/hero-home.jpg',
+    '/images/hero-slide-2.jpg',
+    '/images/hero-slide-3.jpg',
+    '/images/hero-slide-4.jpg'
+  ]}
+  showSearchBar={false}
+  primaryCtaText="Browse Properties"
+  primaryCtaHref="/buy"
+  secondaryCtaText="Get Started"
+  secondaryCtaHref="/services"
+/>
 
       
-      {/* Problem → Solution Section */}
-<section className="py-20 md:py-28 bg-gradient-to-br from-background via-background to-primary/5">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {/* Section Header */}
-    <div className="text-center mb-16">
-  
-      <h2 className="text-3xl md:text-5xl font-bold mb-4">
-        From Frustration to{' '}
-        <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-          Simplification
-        </span>
-      </h2>
-     
-    </div>
-
-    {/* Problems Grid */}
-    <div className="mb-16">
-      <div className="text-center mb-10">
-        <span className="text-sm font-semibold text-destructive/80 uppercase tracking-wider">
-          Common Challenges
-        </span>
-        <h3 className="text-2xl md:text-3xl font-bold mt-2">
-          What Makes Property Search{' '}
-          <span className="text-destructive">Frustrating</span>
-        </h3>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <ProblemCard
-          icon={<Search className="w-7 h-7" />}
-          title="Overwhelmed by Endless Listings"
-          description="Hundreds of properties with no smart filtering. You spend hours scrolling through options that don't match your actual needs."
-        />
-        <ProblemCard
-          icon={<FileQuestion className="w-7 h-7" />}
-          title="Can't Trust Outdated Information"
-          description="Stale photos, vague descriptions, and missing details lead to wasted time visiting properties that don't match expectations."
-        />
-        <ProblemCard
-          icon={<Users className="w-7 h-7" />}
-          title="Complicated Process with Middlemen"
-          description="Too many intermediaries, confusing paperwork, and lack of transparency make buying or renting unnecessarily stressful."
-        />
-      </div>
-    </div>
-
-    {/* Arrow Divider */}
-    <div className="flex justify-center my-8">
-      <div className="relative">
-        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-          <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
-        </div>
-        <div className="absolute top-1/2 left-full w-24 h-px bg-gradient-to-r from-primary/50 to-transparent hidden md:block"></div>
-        <div className="absolute top-1/2 right-full w-24 h-px bg-gradient-to-l from-primary/50 to-transparent hidden md:block"></div>
-      </div>
-    </div>
-
-    {/* Solutions Grid */}
-    <div className="mt-16">
-      <div className="text-center mb-10">
-        <span className="text-sm font-semibold text-primary/80 uppercase tracking-wider">
-          Our Solutions
-        </span>
-        <h3 className="text-2xl md:text-3xl font-bold mt-2">
-          How We{' '}
-          <span className="text-primary">Fix These Problems</span>
-        </h3>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <SolutionCard
-          icon={<Search className="w-7 h-7" />}
-          title="AI-Powered Smart Search"
-          description="Advanced filters, personalized recommendations, and intelligent matching algorithms find your perfect property faster."
-        />
-        <SolutionCard
-          icon={<FileQuestion className="w-7 h-7" />}
-          title="Verified Listings with Virtual Tours"
-          description="Every property is verified with 360° tours, live video walkthroughs, and real-time updates you can trust."
-        />
-        <SolutionCard
-          icon={<Users className="w-7 h-7" />}
-          title="End-to-End Seamless Platform"
-          description="Browse, view, negotiate, and transact all in one place. Direct communication with owners, no hidden fees."
-        />
-      </div>
-    </div>
-
-    {/* CTA Button */}
-    <div className="text-center mt-12">
-      <a
-        href="/buy"
-        className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium group"
-      >
-        Find Your Dream Property
-        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-      </a>
-    </div>
-  </div>
-      </section>
-      
+    
 
 
       {/* How We Can Help Section */}
@@ -310,6 +231,112 @@ export default function Home() {
         </div>
       </section>
 
+      
+
+        {/* Problem → Solution Section */}
+<section className="py-20 md:py-28 bg-gradient-to-br from-background via-background to-primary/5">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div className="text-center mb-16">
+  
+      <h2 className="text-3xl md:text-5xl font-bold mb-4">
+        From Frustration to{' '}
+        <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          Simplification
+        </span>
+      </h2>
+     
+    </div>
+
+    {/* Problems Grid */}
+    <div className="mb-16">
+      <div className="text-center mb-10">
+        <span className="text-sm font-semibold text-destructive/80 uppercase tracking-wider">
+          Common Challenges
+        </span>
+        <h3 className="text-2xl md:text-3xl font-bold mt-2">
+          What Makes Property Search{' '}
+          <span className="text-destructive">Frustrating</span>
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ProblemCard
+          icon={<Search className="w-7 h-7" />}
+          title="Overwhelmed by Endless Listings"
+                description="Hundreds of properties with no smart filtering. You spend hours scrolling through options that don't match your actual needs."
+                 index={0}
+        />
+        <ProblemCard
+          icon={<FileQuestion className="w-7 h-7" />}
+          title="Can't Trust Outdated Information"
+                description="Stale photos, vague descriptions, and missing details lead to wasted time visiting properties that don't match expectations."
+                 index={1}
+        />
+        <ProblemCard
+          icon={<Users className="w-7 h-7" />}
+          title="Complicated Process with Middlemen"
+                description="Too many intermediaries, confusing paperwork, and lack of transparency make buying or renting unnecessarily stressful."
+                  index={2}
+        />
+      </div>
+    </div>
+
+    {/* Arrow Divider */}
+    <div className="flex justify-center my-8">
+      <div className="relative">
+        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+          <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
+        </div>
+        <div className="absolute top-1/2 left-full w-24 h-px bg-gradient-to-r from-primary/50 to-transparent hidden md:block"></div>
+        <div className="absolute top-1/2 right-full w-24 h-px bg-gradient-to-l from-primary/50 to-transparent hidden md:block"></div>
+      </div>
+    </div>
+
+    {/* Solutions Grid */}
+    <div className="mt-16">
+      <div className="text-center mb-10">
+        <span className="text-sm font-semibold text-primary/80 uppercase tracking-wider">
+          Our Solutions
+        </span>
+        <h3 className="text-2xl md:text-3xl font-bold mt-2">
+          How We{' '}
+          <span className="text-primary">Fix These Problems</span>
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <SolutionCard
+          icon={<Search className="w-7 h-7" />}
+          title="AI-Powered Smart Search"
+          description="Advanced filters, personalized recommendations, and intelligent matching algorithms find your perfect property faster."
+        />
+        <SolutionCard
+          icon={<FileQuestion className="w-7 h-7" />}
+          title="Verified Listings with Virtual Tours"
+          description="Every property is verified with 360° tours, live video walkthroughs, and real-time updates you can trust."
+        />
+        <SolutionCard
+          icon={<Users className="w-7 h-7" />}
+          title="End-to-End Seamless Platform"
+          description="Browse, view, negotiate, and transact all in one place. Direct communication with owners, no hidden fees."
+        />
+      </div>
+    </div>
+
+    {/* CTA Button */}
+    <div className="text-center mt-12">
+      <a
+        href="/buy"
+        className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium group"
+      >
+        Find Your Dream Property
+        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </div>
+      </section>
+      
+
+
       {/* Stats Section */}
     
 <section className="pb-16 pt-16 md:pb-24 md:pt:24 bg-primary-foreground text-primary">
@@ -436,8 +463,38 @@ export default function Home() {
         </div>
       </section> */}
 
+      
+      <section id="blogs">
+      <BlogSection 
+  posts={showAllBlogs ? blogPosts : blogPosts.slice(0, 3)}
+  title="Latest Insights & Articles"
+  subtitle="Stay updated with the latest real estate trends, tips, and news"
+  showViewAll={true}
+  onViewAllToggle={() => setShowAllBlogs(!showAllBlogs)}
+/></section>
+
+      
+      <section id="case-study">
+<CaseStudiesSection 
+  caseStudies={caseStudies}
+  title="Success Stories"
+  subtitle="See how we've helped our clients achieve their real estate goals"
+  showViewAll={true}
+  initialDisplayCount={2}
+      />
+      </section>
 
 
+{/* Testimonials Section */}
+      <section id="testimonials">
+      <TestimonialsSection 
+  testimonials={testimonials}
+  title="What Our Clients Say"
+  subtitle="Don't just take our word for it - hear from our satisfied clients"
+  /></section>
+
+      
+      
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -450,13 +507,13 @@ export default function Home() {
               href="/contact"
               className="px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium"
             >
-              Contact Us Today
+            View Live Demo
             </a>
             <a
-              href="/services"
+              href="/contact"
               className="px-8 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary/10 transition font-medium"
             >
-              Learn About Services
+             Get This System
             </a>
           </div>
         </div>
