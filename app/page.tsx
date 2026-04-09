@@ -34,7 +34,12 @@ export default function Home() {
       {/* Hero Section */}
      {/* Hero Section with Slider */}
 <HeroSection
-  title="All-in-One Real Estate Management System to Manage Properties, Leads & Bookings"
+     title={
+          <>
+            All-in-One Real Estate Management System to Manage Properties,{" "}
+            <span className="text-primary">Leads & Bookings</span>
+          </>
+        }
   subtitle="Built for Agencies, Developers & Property Managers – Launch, Scale & Automate Your Real Estate Operations"
   backgroundImages={[
     '/images/hero-home.jpg',

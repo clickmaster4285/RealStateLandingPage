@@ -55,16 +55,16 @@ export default function BlogSection({
 
         {/* View All Button */}
         {showViewAll && (
-          <div className="text-center mt-12">
-            <div
-              onClick={onViewAllToggle}
-              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-300 font-medium group cursor-pointer"
-            >
-              {posts.length > 3 ? 'Show Less Articles' : 'View All Articles'}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-        )}
+  <div className="text-center mt-12">
+    <Link
+      href="/blogs"
+      className="inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary/10 transition-all duration-300 font-medium group cursor-pointer"
+    >
+      View All Articles
+      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+    </Link>
+  </div>
+)}
       </div>
     </section>
   );

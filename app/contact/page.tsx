@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
-import { Mail, Phone, MapPin, Clock, Send, Building, Navigation, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Building, Navigation, CheckCircle2, ChevronDown, HelpCircle } from "lucide-react";
 
 const animationStyles = `
   @keyframes slideInUp {
@@ -50,6 +50,29 @@ const animationStyles = `
   .success-screen {
     animation: scaleIn 0.5s ease-out forwards;
   }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .faq-item {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .faq-item:nth-child(1) { animation-delay: 0.1s; }
+  .faq-item:nth-child(2) { animation-delay: 0.2s; }
+  .faq-item:nth-child(3) { animation-delay: 0.3s; }
+  .faq-item:nth-child(4) { animation-delay: 0.4s; }
+  .faq-item:nth-child(5) { animation-delay: 0.5s; }
+  .faq-item:nth-child(6) { animation-delay: 0.6s; }
 `;
 
 // Form schema
@@ -76,9 +99,44 @@ const LOCATION = {
 
 const FALLBACK_MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(LOCATION.fullAddress)}&output=embed`;
 
+// FAQ Data
+const faqs = [
+  {
+    id: "1",
+    question: "What is ClickMasters Real Estate POS?",
+    answer: "ClickMasters Real Estate POS is a comprehensive property management system that helps agencies manage properties, track leads, handle bookings, and automate their real estate operations all in one platform."
+  },
+  {
+    id: "2",
+    question: "How long does it take to set up the system?",
+    answer: "Most agencies can get fully set up within 24-48 hours. Our team provides guided onboarding and training to ensure a smooth transition."
+  },
+  {
+    id: "3",
+    question: "Is there a free trial available?",
+    answer: "Yes, we offer a 14-day free trial with full access to all features. No credit card required to start."
+  },
+  {
+    id: "4",
+    question: "Can I migrate my existing property data?",
+    answer: "Absolutely! Our team helps you migrate all your existing property listings, client data, and transaction history to our platform."
+  },
+  {
+    id: "5",
+    question: "What kind of support do you provide?",
+    answer: "We provide 24/7 technical support via phone, email, and live chat. All plans include dedicated support from our real estate tech experts."
+  },
+  {
+    id: "6",
+    question: "Is the system customizable for my agency's needs?",
+    answer: "Yes, our platform is fully customizable. You can add custom fields, branding, workflows, and integrations to match your specific requirements."
+  }
+];
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const {
     register,
@@ -127,6 +185,10 @@ export default function ContactPage() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   const contactInfo = [
@@ -401,6 +463,74 @@ SaaS-ready system."
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-background via-background to-primary/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            
+            <h2 className="text-3xl lg:text-4xl  font-bold mb-4 ">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Find answers to common questions about our real estate management system
+            </p>
+          </div>
+
+          {/* FAQ Accordion */}
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={faq.id}
+                className="faq-item bg-card border border-border rounded-xl overflow-hidden hover:border-primary/30 transition-all duration-300"
+              >
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-primary/5 transition-colors duration-300"
+                >
+                  <div className="flex items-center gap-3">
+                    <HelpCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="font-semibold text-foreground">{faq.question}</span>
+                  </div>
+                  <ChevronDown
+                    className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
+                      openFaqIndex === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openFaqIndex === index ? "max-h-96" : "max-h-0"
+                  }`}
+                >
+                  <div className="px-6 pb-4 pt-0">
+                    <div className="h-px bg-border mb-4" />
+                    <p className="text-muted-foreground leading-relaxed pl-8">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Still Have Questions */}
+          <div className="mt-12 text-center p-6 bg-primary/5 rounded-2xl border border-primary/20">
+            <p className="text-foreground font-medium mb-2">Still have questions?</p>
+            <p className="text-muted-foreground text-sm mb-4">
+              Can't find the answer you're looking for? Please contact our support team.
+            </p>
+            <a
+              href="#contact-form"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium"
+            >
+              Contact Support
+            </a>
           </div>
         </div>
       </section>
