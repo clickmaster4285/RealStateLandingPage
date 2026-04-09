@@ -167,6 +167,8 @@ Multi-agent dashboard
 SaaS-ready system."
         primaryCtaText="View Live Demo"
         primaryCtaHref="#contact-form"
+        secondaryCtaText="Get This System"
+        secondaryCtaHref="#contact-form"
         backgroundImage="/images/hero-contact.jpg"
       />
 
