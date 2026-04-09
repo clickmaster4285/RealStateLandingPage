@@ -14,7 +14,7 @@ const adminEmailHtml = (name: string, email: string, message: string, additional
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Contact Submission</title>
+  <title>RealState Contact Form Submissionion</title>
   <style>
     body {
       margin: 0;
@@ -146,7 +146,7 @@ const adminEmailHtml = (name: string, email: string, message: string, additional
   <div class="container">
     <div class="email-wrapper">
       <div class="header">
-        <h1>New Contact Submission</h1>
+        <h1>RealState Contact Form Submissionion</h1>
         <p>from your website contact form</p>
       </div>
       
@@ -418,7 +418,7 @@ export async function POST(req: NextRequest) {
     const { default: nodemailer } = await import('nodemailer');
     
     const body = await req.json();
-    console.log('Received contact form submission:', body);
+ 
     
     const { name, email, message, company, phone, services, budget } = body;
 
@@ -475,7 +475,7 @@ export async function POST(req: NextRequest) {
       subject: `📬 New Contact Form Submission from ${name}`,
       html: adminEmailHtml(name, email, message, additionalInfo),
       // Add plain text alternative for better email client compatibility
-      text: `New Contact Submission\n\nName: ${name}\nEmail: ${email}\n${phone ? `Phone: ${phone}\n` : ''}${company ? `Company: ${company}\n` : ''}${services ? `Services: ${services}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}\nMessage:\n${message}`,
+      text: `RealState Contact Form Submissionion\n\nName: ${name}\nEmail: ${email}\n${phone ? `Phone: ${phone}\n` : ''}${company ? `Company: ${company}\n` : ''}${services ? `Services: ${services}\n` : ''}${budget ? `Budget: ${budget}\n` : ''}\nMessage:\n${message}`,
     };
 
     // Send auto-reply to user with styled HTML
@@ -493,8 +493,6 @@ export async function POST(req: NextRequest) {
       transporter.sendMail(userMailOptions)
     ]);
 
-    console.log('Admin email sent:', adminInfo.messageId);
-    console.log('Auto-reply sent:', userInfo.messageId);
 
     return NextResponse.json(
       { 
