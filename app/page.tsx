@@ -3,7 +3,11 @@ import Footer from '@/components/footer';
 import HeroSection from '@/components/hero-section';
 import PropertyCategories from '@/components/property-categories';
 import PropertyCard from '@/components/property-card';
+import SolutionCard from '@/components/solution-card';
+import ProblemCard from '@/components/problem-card';
+import PricingCard from '@/components/pricingCard';
 import { properties } from '@/lib/property-data';
+import { ArrowRight, FileQuestion, Search, Users } from 'lucide-react';
 
 export default function Home() {
   // Get featured properties (first 3 from each type)
@@ -16,8 +20,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <HeroSection
-        title="Find Your Perfect Property"
-        subtitle="Explore thousands of homes available for buy, rent, or sale. Your dream property awaits."
+        title="All-in-One Real Estate Management System to Manage Properties, Leads & Bookings"
+        subtitle="Built for Agencies, Developers & Property Managers – Launch, Scale & Automate Your Real Estate Operations"
         backgroundImage="/images/hero-home.jpg"
         showSearchBar={false}
         primaryCtaText="Browse Properties"
@@ -25,6 +29,108 @@ export default function Home() {
         secondaryCtaText="Get Started"
         secondaryCtaHref="/services"
       />
+
+      
+      {/* Problem → Solution Section */}
+<section className="py-20 md:py-28 bg-gradient-to-br from-background via-background to-primary/5">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Header */}
+    <div className="text-center mb-16">
+  
+      <h2 className="text-3xl md:text-5xl font-bold mb-4">
+        From Frustration to{' '}
+        <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          Simplification
+        </span>
+      </h2>
+     
+    </div>
+
+    {/* Problems Grid */}
+    <div className="mb-16">
+      <div className="text-center mb-10">
+        <span className="text-sm font-semibold text-destructive/80 uppercase tracking-wider">
+          Common Challenges
+        </span>
+        <h3 className="text-2xl md:text-3xl font-bold mt-2">
+          What Makes Property Search{' '}
+          <span className="text-destructive">Frustrating</span>
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ProblemCard
+          icon={<Search className="w-7 h-7" />}
+          title="Overwhelmed by Endless Listings"
+          description="Hundreds of properties with no smart filtering. You spend hours scrolling through options that don't match your actual needs."
+        />
+        <ProblemCard
+          icon={<FileQuestion className="w-7 h-7" />}
+          title="Can't Trust Outdated Information"
+          description="Stale photos, vague descriptions, and missing details lead to wasted time visiting properties that don't match expectations."
+        />
+        <ProblemCard
+          icon={<Users className="w-7 h-7" />}
+          title="Complicated Process with Middlemen"
+          description="Too many intermediaries, confusing paperwork, and lack of transparency make buying or renting unnecessarily stressful."
+        />
+      </div>
+    </div>
+
+    {/* Arrow Divider */}
+    <div className="flex justify-center my-8">
+      <div className="relative">
+        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+          <ArrowRight className="w-6 h-6 text-primary animate-pulse" />
+        </div>
+        <div className="absolute top-1/2 left-full w-24 h-px bg-gradient-to-r from-primary/50 to-transparent hidden md:block"></div>
+        <div className="absolute top-1/2 right-full w-24 h-px bg-gradient-to-l from-primary/50 to-transparent hidden md:block"></div>
+      </div>
+    </div>
+
+    {/* Solutions Grid */}
+    <div className="mt-16">
+      <div className="text-center mb-10">
+        <span className="text-sm font-semibold text-primary/80 uppercase tracking-wider">
+          Our Solutions
+        </span>
+        <h3 className="text-2xl md:text-3xl font-bold mt-2">
+          How We{' '}
+          <span className="text-primary">Fix These Problems</span>
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <SolutionCard
+          icon={<Search className="w-7 h-7" />}
+          title="AI-Powered Smart Search"
+          description="Advanced filters, personalized recommendations, and intelligent matching algorithms find your perfect property faster."
+        />
+        <SolutionCard
+          icon={<FileQuestion className="w-7 h-7" />}
+          title="Verified Listings with Virtual Tours"
+          description="Every property is verified with 360° tours, live video walkthroughs, and real-time updates you can trust."
+        />
+        <SolutionCard
+          icon={<Users className="w-7 h-7" />}
+          title="End-to-End Seamless Platform"
+          description="Browse, view, negotiate, and transact all in one place. Direct communication with owners, no hidden fees."
+        />
+      </div>
+    </div>
+
+    {/* CTA Button */}
+    <div className="text-center mt-12">
+      <a
+        href="/buy"
+        className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium group"
+      >
+        Find Your Dream Property
+        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </div>
+      </section>
+      
+
 
       {/* How We Can Help Section */}
       <style>
@@ -205,28 +311,134 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-24 bg-primary-foreground text-primary">
+    
+<section className="pb-16 pt-16 md:pb-24 md:pt:24 bg-primary-foreground text-primary">
+  <label className="text-3xl md:text-4xl font-bold mb-12 block text-center">
+  Trusted by Agencies & Developers
+</label>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center">
+      <div>
+        <div className="text-4xl md:text-5xl font-bold mb-2">1000+</div>
+        <div className="text-lg opacity-90">Properties Listed</div>
+      </div>
+      <div>
+        <div className="text-4xl md:text-5xl font-bold mb-2">95%</div>
+        <div className="text-lg opacity-90">Client Satisfaction</div>
+            </div>
+            
+            <div>
+        <div className="text-4xl md:text-5xl font-bold mb-2">30%</div>
+        <div className="text-lg opacity-90">faster deal closing</div>
+            </div>
+            
+
+      <div>
+        <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
+        <div className="text-lg opacity-90">Expert Agents</div>
+      </div>
+      <div>
+        <div className="text-4xl md:text-5xl font-bold mb-2">25</div>
+        <div className="text-lg opacity-90">Years in Business</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+            {/* Pricing Section */}
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">12k+</div>
-              <div className="text-lg opacity-90">Properties Listed</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">95%</div>
-              <div className="text-lg opacity-90">Client Satisfaction</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
-              <div className="text-lg opacity-90">Expert Agents</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">25</div>
-              <div className="text-lg opacity-90">Years in Business</div>
-            </div>
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            {/* <span className="text-sm font-semibold text-primary/80 uppercase tracking-wider">
+              Pricing Plans
+            </span> */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Simple, Transparent{' '}
+              <span className="text-primary">
+                Pricing
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Choose the perfect plan for your real estate needs. No hidden fees, cancel anytime.
+            </p>
+          </div>
+
+          {/* Pricing Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Basic Plan */}
+            <PricingCard
+              name="Basic"
+              price="$49"
+              period="/month"
+              description="Perfect for individual agents just starting out"
+              features={[
+                "Up to 50 property listings",
+                "Basic analytics dashboard",
+                "Email support",
+                "Standard listing visibility",
+                "Basic lead management",
+                "Mobile app access"
+              ]}
+              buttonText="Contact Sales"
+              buttonLink="/contact"
+            />
+
+            {/* Professional Plan - Popular */}
+            <PricingCard
+              name="Professional"
+              price="$99"
+              period="/month"
+              description="For growing agencies and professional agents"
+              features={[
+                "Up to 500 property listings",
+                "Advanced analytics & reports",
+                "Priority email & chat support",
+                "Featured listing visibility",
+                "Advanced lead management",
+                "CRM integration",
+                "Virtual tour support",
+                "Team collaboration tools"
+              ]}
+              isPopular={true}
+              buttonText="Contact Sales"
+              buttonLink="/contact"
+            />
+
+            {/* Enterprise Plan */}
+            <PricingCard
+              name="Enterprise"
+              price="Custom"
+              period=""
+              description="For large agencies and property developers"
+              features={[
+                "Unlimited property listings",
+                "Custom analytics & reporting",
+                "24/7 priority phone support",
+                "Premium listing visibility",
+                "Enterprise lead management",
+                "API access",
+                "White-label solution",
+                "Dedicated account manager",
+                "Custom development options"
+              ]}
+              buttonText="Contact Sales"
+              buttonLink="/contact"
+            />
+          </div>
+
+          {/* Additional Info */}
+          <div className="text-center mt-12">
+            <p className="text-sm text-muted-foreground">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
           </div>
         </div>
       </section>
+
+
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-background">

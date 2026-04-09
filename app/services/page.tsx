@@ -1,7 +1,7 @@
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import HeroSection from '@/components/hero-section';
-import { CheckCircle, FileText, Shield, Users, TrendingUp, Home } from 'lucide-react';
+import { CheckCircle, FileText, Shield, Users, TrendingUp, Home, UsersRoundIcon, FileType2Icon, Calendar } from 'lucide-react';
 
 const animationStyles = `
   @keyframes fadeInUp {
@@ -44,32 +44,74 @@ export default function ServicesPage() {
     {
       icon: Home,
       title: 'Property Management',
-      description: 'Professional management of your rental properties with tenant screening, maintenance coordination, rent collection, and comprehensive financial reporting. We handle all day-to-day operations so you can focus on growth.',
+      description: [
+        'Add, edit, categorize properties',
+        'Media gallery + pricing',
+        'Status tracking (available/sold/rented)',
+      ],
+    },
+      {
+      icon: UsersRoundIcon,
+      title: 'CRM & Leads',
+      description: [
+        'Capture leads automatically',
+        'Track deals pipeline',
+        'Assign to agents',
+      ],
+    },
+     {
+      icon: Calendar,
+      title: 'Booking System',
+      description: [
+        'Schedule visits',
+        'Calendar sync',
+        'Automated confirmations',
+      ],
     },
     {
       icon: FileText,
       title: 'Legal Documentation',
-      description: 'Expert handling of all property-related legal documents and compliance requirements. Our team ensures all contracts, deeds, and documentation meet state and federal regulations.',
+      description: [
+        'Handle contracts, deeds, and agreements',
+        'Ensure compliance with local regulations',
+        'Streamline document management for properties',
+      ],
     },
     {
       icon: Shield,
       title: 'Title & Insurance',
-      description: 'Comprehensive title insurance and protection for your real estate investments. We verify property ownership and protect against any title defects or claims.',
+      description: [
+        'Title verification and property ownership checks',
+        'Protect against title defects or claims',
+        'Comprehensive insurance solutions',
+      ],
     },
     {
       icon: Users,
       title: 'Expert Agents',
-      description: 'Work with our experienced team of professional real estate agents and consultants. Each team member brings decades of industry experience and local market knowledge.',
+      description: [
+        'Work with experienced real estate professionals',
+        'Local market knowledge and expertise',
+        'Personalized guidance for every client',
+      ],
     },
     {
       icon: TrendingUp,
       title: 'Market Analysis',
-      description: 'Detailed market reports and analysis to help you make informed decisions. Get comprehensive data on pricing trends, neighborhood insights, and investment opportunities.',
+      description: [
+        'Detailed reports on pricing trends',
+        'Neighborhood insights and investment opportunities',
+        'Data-driven decision support',
+      ],
     },
     {
       icon: Home,
       title: 'Home Staging',
-      description: 'Professional staging services to showcase your property in the best light. We use modern design principles and strategic furniture placement to maximize buyer appeal.',
+      description: [
+        'Professional property staging',
+        'Maximize buyer appeal with modern design',
+        'Furniture placement for optimal presentation',
+      ],
     },
   ];
 
@@ -105,7 +147,11 @@ export default function ServicesPage() {
                     <IconComponent className="w-10 h-10 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.description}</p>
+                  <ul className="list-disc list-inside text-muted-foreground">
+                    {service.description.map((line, idx) => (
+                      <li key={idx}>{line}</li>
+                    ))}
+                  </ul>
                 </div>
               );
             })}
@@ -113,62 +159,42 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Why Choose Us - FIXED LEFT ALIGNMENT */}
+      {/* Why Choose Us */}
       <section className="py-16 md:py-24 bg-card border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Removed mx-auto and max-w-3xl to allow full left alignment */}
           <h2 className="text-3xl md:text-4xl font-bold mb-8">Why Choose Us?</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="why-choose-item flex gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Expertise & Experience</h3>
-                <p className="text-muted-foreground">
-                  With 25 years in the real estate industry, our team brings unmatched expertise and proven track record of successful transactions across diverse markets.
-                </p>
+            {[
+              {
+                title: 'Expertise & Experience',
+                description: 'With 25 years in the real estate industry, our team brings unmatched expertise and proven track record of successful transactions across diverse markets.',
+              },
+              {
+                title: 'Personalized Service',
+                description: 'Every client is unique. We tailor our services to meet your specific goals and timeline, providing custom solutions for your real estate needs.',
+              },
+              {
+                title: 'Market Knowledge',
+                description: 'Our agents stay updated on market trends, prices, and opportunities to serve you better. We provide competitive analysis and investment insights.',
+              },
+              {
+                title: 'Technology Driven',
+                description: 'We leverage cutting-edge technology to provide you with the best tools, virtual tours, and real-time property information.',
+              },
+              {
+                title: 'Dedicated Support',
+                description: 'Our support team is available to answer your questions and provide guidance every step of the way. We&apos;re committed to your success.',
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="why-choose-item flex gap-4">
+                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.description}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="why-choose-item flex gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Personalized Service</h3>
-                <p className="text-muted-foreground">
-                  Every client is unique. We tailor our services to meet your specific goals and timeline, providing custom solutions for your real estate needs.
-                </p>
-              </div>
-            </div>
-
-            <div className="why-choose-item flex gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Market Knowledge</h3>
-                <p className="text-muted-foreground">
-                  Our agents stay updated on market trends, prices, and opportunities to serve you better. We provide competitive analysis and investment insights.
-                </p>
-              </div>
-            </div>
-
-            <div className="why-choose-item flex gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Technology Driven</h3>
-                <p className="text-muted-foreground">
-                  We leverage cutting-edge technology to provide you with the best tools, virtual tours, and real-time property information.
-                </p>
-              </div>
-            </div>
-
-            <div className="why-choose-item flex gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-lg mb-2">Dedicated Support</h3>
-                <p className="text-muted-foreground">
-                  Our support team is available to answer your questions and provide guidance every step of the way. We&apos;re committed to your success.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -161,8 +161,11 @@ export default function ContactPage() {
 
       <HeroSection
         title="Contact Us"
-        subtitle="Have questions about our real estate POS software? We're here to help."
-        primaryCtaText="Get a Demo"
+        subtitle="Manage unlimited properties
+Track leads & close deals faster
+Multi-agent dashboard
+SaaS-ready system."
+        primaryCtaText="View Live Demo"
         primaryCtaHref="#contact-form"
         backgroundImage="/images/hero-contact.jpg"
       />

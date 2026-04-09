@@ -21,8 +21,8 @@ export default function HeroSection({
   showSearchBar = false,
   primaryCtaText = 'Explore',
   primaryCtaHref = '/buy',
-  secondaryCtaText = 'Learn More',
-  secondaryCtaHref = '/about',
+  secondaryCtaText = 'Get This System',
+  secondaryCtaHref = '/contact',
 }: HeroSectionProps) {
   return (
     <>
