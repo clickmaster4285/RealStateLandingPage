@@ -4,8 +4,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
+   images: {
+    formats: ['image/avif', 'image/webp'],
+    
   },
 }
 

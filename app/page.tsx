@@ -19,6 +19,7 @@ import { caseStudies } from '@/lib/case-studies-data';
 
 
 import { ArrowRight, FileQuestion, Search, Users } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Home() {
   // Get featured properties (first 3 from each type)
@@ -105,12 +106,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Buying */}
             <div className="help-card group cursor-pointer">
-              <div className="relative overflow-hidden rounded-xl mb-4 h-64">
-                <img
-                  src="/images/service-buying.webp"
-                  alt="Buying a home"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+              <div className="relative h-64 overflow-hidden rounded-xl">
+               <Image
+  src="/images/service-buying.webp"
+  alt="Buying a home"
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="object-cover group-hover:scale-110 transition-transform duration-300"
+/>
               </div>
               <h3 className="text-xl font-bold mb-2">Finding Your Dream Home</h3>
               <p className="text-muted-foreground mb-4">
@@ -124,11 +127,13 @@ export default function Home() {
             {/* Renting */}
             <div className="help-card group cursor-pointer" style={{ animationDelay: '0.4s' }}>
               <div className="relative overflow-hidden rounded-xl mb-4 h-64">
-                <img
-                  src="/images/service-rental.webp"
-                  alt="Rental properties"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+             <Image
+  src="/images/service-rental.webp"
+  alt="Rental properties"
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="object-cover group-hover:scale-110 transition-transform duration-300"
+/>
               </div>
               <h3 className="text-xl font-bold mb-2">Perfect Rental Solutions</h3>
               <p className="text-muted-foreground mb-4">
@@ -142,11 +147,13 @@ export default function Home() {
             {/* Selling */}
             <div className="help-card group cursor-pointer" style={{ animationDelay: '0.6s' }}>
               <div className="relative overflow-hidden rounded-xl mb-4 h-64">
-                <img
-                  src="/images/service-selling.webp"
-                  alt="Selling a home"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
+              <Image
+  src="/images/service-selling.webp"
+  alt="Selling a home"
+  fill
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="object-cover group-hover:scale-110 transition-transform duration-300"
+/>
               </div>
               <h3 className="text-xl font-bold mb-2">Maximize Your Sale</h3>
               <p className="text-muted-foreground mb-4">

@@ -2,6 +2,7 @@
 'use client';
 
 import { Star, Quote, User, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 const testimonialAnimationStyles = `
@@ -166,11 +167,13 @@ export default function TestimonialCard({
               <div className="relative">
                 {avatar ? (
                   <div className="relative">
-                    <img
-                      src={avatar}
-                      alt={name}
-                      className="w-12 h-12 rounded-full object-cover shrink-0 ring-2 ring-primary/20 group-hover/author:ring-4 transition-all duration-300"
-                    />
+                <Image
+  src={avatar}
+  alt={name}
+  width={48}
+  height={48}
+  className="w-12 h-12 rounded-full object-cover shrink-0 ring-2 ring-primary/20 group-hover/author:ring-4 transition-all duration-300"
+/>
                     <div className="absolute inset-0 rounded-full bg-primary/10 opacity-0 group-hover/author:opacity-20 transition-opacity duration-300" />
                   </div>
                 ) : (

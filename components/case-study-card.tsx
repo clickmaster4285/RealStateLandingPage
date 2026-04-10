@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { ArrowRight, TrendingUp, Users, Clock, DollarSign } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -137,15 +138,14 @@ export default function CaseStudyCard({
     >
       <div className="bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-2xl h-full flex flex-col md:flex-row">
         {/* Image Section */}
-        <div
-          ref={imageRef}
-          className="relative md:w-2/5 overflow-hidden"
-        >
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          />
+      <div ref={imageRef} className="relative md:w-2/5 overflow-hidden h-64 md:h-auto">
+         <Image
+  src={image}
+  alt={title}
+  fill
+  className="object-cover group-hover:scale-110 transition-transform duration-700"
+  sizes="(max-width: 768px) 100vw, 50vw"
+/>
           <div className="absolute top-4 left-4">
             <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
               {category}

@@ -1,6 +1,7 @@
 'use client';
 
 import { Calendar, User, ArrowRight, Clock } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
@@ -79,18 +80,21 @@ export default function BlogCard({
      
           <div className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl h-full flex flex-col">
             {/* Image Container */}
-            <div className="relative overflow-hidden h-48">
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
-                  {category}
-                </span>
-              </div>
-            </div>
+           <div className="relative overflow-hidden h-48">
+  <Image
+    src={image}
+    alt={title}
+    fill
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    className="object-cover group-hover:scale-110 transition-transform duration-500"
+  />
+
+  <div className="absolute top-4 left-4">
+    <span className="px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
+      {category}
+    </span>
+  </div>
+</div>
 
             {/* Content */}
             <div className="p-6 flex-1 flex flex-col">

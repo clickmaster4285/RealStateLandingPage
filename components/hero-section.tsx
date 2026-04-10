@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Search, Home } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface HeroSectionProps {
   title: string;
@@ -178,22 +179,36 @@ export default function HeroSection({
       
       <div className="relative py-20 md:py-32 overflow-hidden min-h-[600px] flex items-center">
         {/* Background Slider */}
-        <div className="absolute inset-0">
-          {(() => {
-            let images = backgroundImages || (backgroundImage ? [backgroundImage] : ['/images/hero-home.webp']);
-            return images.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Hero background ${index + 1}`}
-                className={`slider-image ${
-                  index === currentImageIndex ? 'slider-image-active' : 'slider-image-inactive'
-                }`}
-              />
-            ));
-          })()}
-          <div className="image-overlay" />
-        </div>
+      <div className="absolute inset-0">
+  {(() => {
+    let images = backgroundImages || [backgroundImage];
+
+    const currentImage = images[currentImageIndex];
+    const nextImage = images[(currentImageIndex + 1) % images.length];
+
+    return (
+      <>
+        {/* Current Image (ONLY ONE RENDERED) */}
+        <Image
+          key={currentImage}
+          src={currentImage}
+          alt="Hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover transition-opacity duration-1000"
+        />
+
+        {/* Preload NEXT image (hidden but optimized) */}
+        {images.length > 1 && (
+          <link rel="preload" as="image" href={nextImage} />
+        )}
+      </>
+    );
+  })()}
+
+  <div className="image-overlay" />
+</div>
 
         {/* Slider Dots (only show if multiple images) */}
 {(() => {

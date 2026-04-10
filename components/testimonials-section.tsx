@@ -207,11 +207,12 @@ export default function TestimonialsSection({
               <div 
                 key={`${testimonial.id}-${currentIndex}`} 
                 className="h-full transform transition-all duration-500"
-                style={{ 
-                  animation: isSectionVisible ? 'slideInLeft 0.6s ease-out forwards' : 'none',
-                  animationDelay: `${idx * 0.1 + 0.3}s`,
-                  opacity: 0
-                }}
+              style={{
+  animation: isSectionVisible
+    ? `slideInLeft 0.6s ease-out forwards ${idx * 0.1 + 0.3}s`
+    : 'none',
+  opacity: 0,
+}}
               >
                 <TestimonialCard 
                   {...testimonial} 
